@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Theme functions and definitions
  *
@@ -10,7 +11,8 @@
  *
  * @return void
  */
-function hello_elementor_child_enqueue_scripts() {
+function hello_elementor_child_enqueue_scripts()
+{
 	wp_enqueue_style(
 		'hello-elementor-child-style',
 		get_stylesheet_directory_uri() . '/dist/app.css',
@@ -20,30 +22,30 @@ function hello_elementor_child_enqueue_scripts() {
 		'1.0.0'
 	);
 
-   wp_enqueue_script( 'my-app', get_stylesheet_directory_uri() . '/dist/app.js', array(), '1.0.0', true );
+	wp_enqueue_script('my-app', get_stylesheet_directory_uri() . '/dist/app.js', array(), '1.0.0', true);
 }
-add_action( 'wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20 );
+add_action('wp_enqueue_scripts', 'hello_elementor_child_enqueue_scripts', 20);
 
 /* Custom Post Type Start */
 function create_posttype_event()
 {
 	register_post_type(
-		'Evenement',
+		'Agenda',
 		// CPT Options
 		array(
 			'labels' => array(
-				'name' => __('Évenements', 'hello-elementor'),
-				'singular_name' => __('Évenement', 'hello-elementor')
+				'name' => __('Agenda', 'hello-elementor'),
+				'singular_name' => __('Agenda', 'hello-elementor')
 			),
 			'public' => true,
 			'has_archive' => false,
 			'taxonomies' => array('category'),
 			'show_in_nav_menus' => true,
-			'supports' => array('title'),
+			'supports' => array('title', 'thumbnail'),
 			'menu_icon' => 'dashicons-calendar-alt',
-			'rewrite' => array('slug' => 'evenements'),
-			'capability_type' => array('evenement', 'evenements'),
+			'rewrite' => array('slug' => 'agenda'),
 			'map_meta_cap'    => true,
+			'rewrite' => array('slug' => 'agenda'),
 		)
 	);
 }
@@ -74,7 +76,7 @@ add_action('elementor/query/my_custom_filter_past', function ($query) {
 	$query->set('meta_query', array(
 		array(
 			'key'     => 'date_de_debut',
-			'compare' => '<=',
+			'compare' => '<',
 			'value'   => $tomorrow,
 			'type'	  => 'DATE'
 		),
@@ -83,3 +85,10 @@ add_action('elementor/query/my_custom_filter_past', function ($query) {
 	$query->set('orderby', 'meta_value_num');
 	$query->set('order', 'DESC');
 });
+
+
+remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
+remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
+remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+remove_action( 'woocommerce_before_subcategory_title', 'woocommerce_subcategory_thumbnail', 10 );
+remove_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20 );

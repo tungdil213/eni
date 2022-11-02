@@ -1,1 +1,1 @@
-(()=>{console.log("Start Hello-Elementor");})();
+(()=>{console.log("Start Hello-Elementor");var e=document.getElementsByClassName("accordion");for(let t=0;t<e.length;t++)e[t].addEventListener("click",function(){l(this),console.log("Riko",this)});var l=t=>{t.classList.toggle("active"),n(t.nextElementSibling)},o=t=>t?t.classList.contains("accordeon-panel"):null,c=t=>{t.style.maxHeight=t.style.maxHeight?null:t.scrollHeight+"px",n(t.nextElementSibling)},n=t=>{o(t)&&c(t)};})();

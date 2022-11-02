@@ -1,1 +1,54 @@
+.accordeon-panel {
+    background-color: inherit;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.3s ease-out !important;
+}
 
+.elementor-editor-active .accordeon-panel {
+    max-height: inherit;
+    overflow: inherit;
+    display: block;
+}
+
+.arrow-next {
+    transition: rotate 300ms;
+    transition-property: transform;
+}
+
+.elementor-section.accordion.active .arrow-next {
+    transform: rotate(180deg);
+}
+
+.add_to_cart_button {
+    width: 100%;
+    text-align: center;
+}
+
+.woocommerce #respond input#submit.alt,
+.woocommerce a.button.alt,
+.woocommerce button.button.alt,
+.woocommerce input.button.alt {
+    color: var(--e-global-color-cb78e80);
+    background-color: var(--e-global-color-primary);
+    border-color: var(--e-global-color-cb78e80);
+    border-style: solid;
+    border-width: 1px 1px 1px 1px;
+
+    &:hover {
+        color: var(--e-global-color-primary);
+        background-color: var(--e-global-color-cb78e80);
+        border-color: var(--e-global-color-cb78e80);
+    }
+}
+
+.woocommerce-checkout #content,
+.woocommerce-cart #content {
+    color: var(--e-global-color-cb78e80);
+}
+
+a {
+    background-color: transparent;
+    text-decoration: none;
+    color: var(--e-global-color-secondary);
+}
