@@ -65,7 +65,7 @@ add_action('elementor/query/my_custom_filter_head', function ($query) {
 		),
 	));
 	$query->set('meta_key', 'date_de_debut');
-	$query->set('orderby', 'meta_value_num');
+	$query->set('orderby', 'meta_value');
 	$query->set('order', 'ASC');
 });
 
@@ -82,13 +82,25 @@ add_action('elementor/query/my_custom_filter_past', function ($query) {
 		),
 	));
 	$query->set('meta_key', 'date_de_debut');
-	$query->set('orderby', 'meta_value_num');
+	$query->set('orderby', 'meta_value');
 	$query->set('order', 'DESC');
 });
 
 
 remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
-remove_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
-remove_action( 'woocommerce_before_subcategory_title', 'woocommerce_subcategory_thumbnail', 10 );
-remove_action( 'woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20 );
+remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
+remove_action('woocommerce_before_subcategory_title', 'woocommerce_subcategory_thumbnail', 10);
+remove_action('woocommerce_product_thumbnails', 'woocommerce_show_product_thumbnails', 20);
+
+add_filter('woocommerce_product_single_add_to_cart_text', 'woocommerce_custom_single_add_to_cart_text');
+function woocommerce_custom_single_add_to_cart_text()
+{
+}
+
+// To change add to cart text on product archives(Collection) page
+add_filter('woocommerce_product_add_to_cart_text', 'woocommerce_custom_product_add_to_cart_text');
+function woocommerce_custom_product_add_to_cart_text()
+{
+	return __('Order CD', 'woocommerce');
+}
